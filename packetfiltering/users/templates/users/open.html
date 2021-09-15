@@ -1,0 +1,63 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block customcss %}
+    {{block.super}}
+    <link rel="stylesheet" href="{% static 'users/home.css' %}">
+{% endblock customcss %}
+
+{% block title %}Home Page{% endblock title %}
+
+{% block content %}
+    {% if perms.users.view_firewall %}
+        <div class="mt-5">
+            <div class="container box1">
+                <div class="row">
+                    <h4 class="col-sm">Packet Filtering</h4>
+                    <input type="checkbox" id="myCheck" onclick="myFunction()" name="">
+                </div>
+            </div>
+            <p class="text-center" id="text" style="display:none">Packet Filtering Started...</p>
+            <div class="container box1">
+                <div class="row">
+                    <h4 class="col-sm">Firewall Rules & Policies</h4>
+                    <input type="checkbox" id="myCheck1" onclick="myFunction1()" name="">
+                </div>
+            </div>
+            <p class="text-center" id="text1" style="display:none">Firewall Rules are Applied</p>
+        </div>
+    {% else %}
+        <h3 class="text-center">Permission is not Given</h3>
+    {% endif %}
+    <script>
+        function myFunction() {
+    // Get the checkbox
+        let checkBox = document.getElementById("myCheck");
+    // Get the output text
+        let text = document.getElementById("text");
+  
+    // If the checkbox is checked, display the output text
+        if (checkBox.checked == true){
+        text.style.display = "block";
+        window.location.href = "{% url 'filter' %}";
+        } else {
+        text.style.display = "none";
+        }
+    } 
+        function myFunction1() {
+    // Get the checkbox
+        let checkBox = document.getElementById("myCheck1");
+    // Get the output text
+        let text = document.getElementById("text1");
+  
+    // If the checkbox is checked, display the output text
+        if (checkBox.checked == true){
+        text.style.display = "block";
+        window.location.href = "{% url 'firewall' %}";
+        } else {
+        text.style.display = "none";
+        }
+    } 
+    </script>
+    
+{% endblock content %}

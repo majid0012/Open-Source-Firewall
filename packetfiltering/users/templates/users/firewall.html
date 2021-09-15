@@ -1,0 +1,25 @@
+{% extends 'users/base.html' %}
+
+{% block title %}Packet Filtering{% endblock title %}
+
+{% block content %}
+    <h2 class="text-center">Packets Passed</h2>
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Source</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for src, status in packets %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{src}}</td>
+                <td>{{status}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
